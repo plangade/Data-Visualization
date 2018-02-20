@@ -1,0 +1,11 @@
+library(ggplot2)
+crimes <- data.frame(state = tolower(rownames(USArrests)), USArrests)
+library(maps)
+states_map <-map_data("state")
+crime_map <- merge(states_map,crimes, by.x = "region", by.y = "state")
+head(crime_map)
+library(plyr)
+crime_map <- arrange(crime_map, group, order)
+head(crime_map)
+ggplot(crime_map,aes(x=long,y=lat, group= group,fill= UrbanPop))+geom_polygon(color="black")+coord_map("polyconic") + ggtitle("USArrests UrbanPop Choropleth") +scale_x_continuous(name="Longitude") + scale_y_continuous(name="Latitude")
+

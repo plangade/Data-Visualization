@@ -1,0 +1,32 @@
+---
+title: "Assignment 4 : Geom Diagram"
+output: 
+  html_document: 
+    keep_md: yes
+author: "Group 9"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+This rmd file shows a deom_rug graph created with geom_rug, which shows the positions of the data points along x and y are denoted by tick marks, reminiscent of the tassels on a rug. 
+
+```{r cars}
+library(ggplot2)
+library(plotly)
+library(readxl)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+UNdata <- read_excel('UNdata.xlsx',sheet = 1)
+p <- ggplot(UNdata, aes(HDI,LifeExp, label = country, color=Edu)) + geom_jitter() +  geom_rug(alpha = 1/2, position = "jitter",sides="trbl")  + geom_point() + scale_x_continuous(name="Human Development Index") + scale_y_continuous(name="Life Expectancy")+labs(colour = "Education")
+ggplotly(p)
+```
+
+End of assignment :)
