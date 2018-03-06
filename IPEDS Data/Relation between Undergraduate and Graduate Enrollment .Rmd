@@ -1,0 +1,22 @@
+---
+title: "R Notebook : Assignment 2"
+output: html_notebook
+---
+
+```{r load packages and data}
+library(ggplot2)
+library(readxl)
+
+collegedata.df <- read_excel(file.choose())
+head(collegedata.df) 
+str(collegedata.df) 
+dim(collegedata.df) 
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+```{r}
+collegedata.p <- ggplot(data = collegedata.df,aes_string(x = "`Graduate enrollment`", y = "`Undergraduate enrollment`", size = "`Graduation rate - Bachelor degree within 5 years, total`")) 
+collegedata.p + geom_point(aes_string(color = "`Profile`"), alpha=0.5) +
+	labs(title = "Relation between Undergraduate enrollment and Graduate enrollment ") +   scale_radius() + scale_color_manual(values = c("Other" = "lightsalmon", "Peer" = "yellow", "Aspire" = "red4")) + theme(legend.position = "bottom")
+```
